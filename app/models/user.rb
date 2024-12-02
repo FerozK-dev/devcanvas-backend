@@ -5,8 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :educations, dependent: :destroy
-  has_many :experience, dependent: :destroy
+  has_many :experiences, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_one_attached :profile_picture
+  has_one_attached :resume
+
+  validates :email, uniqueness: true
   
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)

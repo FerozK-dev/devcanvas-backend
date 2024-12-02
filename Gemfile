@@ -73,3 +73,4 @@ gem 'jwt'
 gem 'bcrypt'
 gem 'dotenv-rails'
 gem 'rack-cors'
+gem 'active_model_serializers', require: true

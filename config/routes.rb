@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       end
 
       resources :educations, except: %i[edit show new]
+      resources :projects, except: %i[edit show new]
+      resources :experiences, except: %i[edit show new]
     end
   end
 end
