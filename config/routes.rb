@@ -19,6 +19,11 @@ Rails.application.routes.draw do
         collection do
           get :show_profile
         end
+        patch :toggle_portfolio_status, on: :member
+      end
+
+      resources :portfolios, only: %i[show] do
+        get :show_public, on: :member
       end
 
       resources :educations, except: %i[edit show new]
