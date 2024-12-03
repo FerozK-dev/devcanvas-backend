@@ -13,6 +13,14 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
   end
 
+  def toggle_portfolio_status
+    if @user.update(publish_portfolio: !@user&.publish_portfolio)
+      render json: 'Portfolio status updated successfully'
+    else
+      render json: { error: @user.errors.to_a }, status: :forbidden
+    end
+  end
+
   private
 
   def set_user
@@ -20,7 +28,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def user_params
-    params.permit(:first_name, :last_name, :location, :github_url, :linked_url,
+    params.permit(:first_name, :last_name, :location, :github_url, :linked_url, :publish_portfolio,
                   :work_emai, :title, :headline, :about_me, :contact, :profile_picture, :work_email, :resume)
   end
 end
