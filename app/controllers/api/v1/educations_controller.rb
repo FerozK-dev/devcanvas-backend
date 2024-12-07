@@ -1,6 +1,6 @@
 class Api::V1::EducationsController < Api::V1::BaseController
   before_action :set_education, only: [:update, :destroy]
-  
+
   def index
     @educations = current_user.educations
 
@@ -11,7 +11,7 @@ class Api::V1::EducationsController < Api::V1::BaseController
     @education = current_user.educations.new(education_params)
 
     if @education.save
-      render json: { message: 'education added successfully' }
+      render json: @education, serializer: Api::V1::EducationSerializer
     else
       render json: { message: @education.errors.to_a }, status: :forbidden
     end
@@ -36,7 +36,7 @@ class Api::V1::EducationsController < Api::V1::BaseController
   private
 
   def education_params
-    params.permit(:school, :degree, :field, :start_year, :end_year, :grade, :activities, :description) 
+    params.permit(:school, :degree, :field, :start_year, :end_year, :grade, :activities, :description)
   end
 
   def set_education
