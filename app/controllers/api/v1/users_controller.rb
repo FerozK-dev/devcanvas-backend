@@ -7,7 +7,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def update
     if @user.update(user_params)
-      render json: 'Profile updated successfully'
+      render json: @user, serializer: Api::V1::UserSerializer
     else
       render json: { error: @user.errors.to_a }, status: :forbidden
     end

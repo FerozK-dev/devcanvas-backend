@@ -1,6 +1,6 @@
 class Api::V1::ExperiencesController < Api::V1::BaseController
   before_action :set_experience, only: [:update, :destroy]
-  
+
   def index
     @experiences = current_user.experiences
 
@@ -11,7 +11,7 @@ class Api::V1::ExperiencesController < Api::V1::BaseController
     @experience = current_user.experiences.new(experience_params)
 
     if @experience.save
-      render json: { message: 'experience added successfully' }
+      render json: @experience, serializer: Api::V1::ExperienceSerializer
     else
       render json: { message: @experience.errors.to_a }, status: :forbidden
     end
